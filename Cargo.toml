@@ -6,6 +6,8 @@ description = "NS16550A UART driver."
 license = "MIT"
 readme = "README.adoc"
 repository = "https://github.com/jeudine/NS16550A"
+categories = ["embedded", "no-std", "hardware-support" ]
+documentation = "https://docs.rs/ns16550a"
 edition = "2018"
 
 [dependencies]
