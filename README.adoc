@@ -1,3 +1,38 @@
 = NS16550A
 
-NS16550A UART driver written in Rust
+NS16550A UART driver written in Rust.
+
+== Installation
+
+Add the following to Cargo.toml:
+
+[source, toml]
+----
+ns16550a = "0.1"
+----
+
+== Example
+
+Example usage:
+
+[source, rust]
+----
+use ns16550a::*;
+
+fn main() {
+    let mut uart = Uart::new(0x1000_0000);
+    uart.init(WordLength::EIGHT,
+              StopBits::ONE,
+              ParityBit::DISABLE,
+              ParitySelect::EVEN,
+              StickParity::DISABLE,
+              Break::DISABLE,
+              DMAMode::MODE0,
+              100,
+              );
+    write!(&mut uart, "Hello, world!\n\r");
+    loop {
+        uart.put(uart.get().unwrap_or_default());
+    }
+}
+----

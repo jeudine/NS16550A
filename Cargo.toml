@@ -2,7 +2,7 @@
 name = "ns16550a"
 version = "0.1.0"
 authors = ["Julien Eudine <julien@eudine.fr>"]
-description = "NS16550A UART driver"
+description = "NS16550A UART driver."
 license = "MIT"
 readme = "README.adoc"
 repository = "https://github.com/jeudine/NS16550A"

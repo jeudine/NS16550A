@@ -1,13 +1,18 @@
-//
+//! NS16550A UART driver.
+
 #![no_std]
+
 use core::fmt::{Result, Write};
 
 #[derive(Copy, Clone)]
+/// Struct representing a NS16550A UART peripheral
 pub struct Uart {
+    /// Base address of the peripheral
     base_address: usize,
 }
 
 #[derive(Copy, Clone)]
+/// Word length
 pub enum WordLength {
     FIVE = 0,
     SIX = 1,
@@ -16,52 +21,61 @@ pub enum WordLength {
 }
 
 #[derive(Copy, Clone)]
+/// Number of stop bits
 pub enum StopBits {
     ONE = 0,
     TWO = 1,
 }
 
 #[derive(Copy, Clone)]
+/// Parity bits
 pub enum ParityBit {
     DISABLE = 0,
     ENABLE = 1,
 }
 
 #[derive(Copy, Clone)]
+/// Parity select
 pub enum ParitySelect {
     EVEN = 0,
     ODD = 1,
 }
 
 #[derive(Copy, Clone)]
+/// Stick parity
 pub enum StickParity {
     DISABLE = 0,
     ENABLE = 1,
 }
 
 #[derive(Copy, Clone)]
+/// Break
 pub enum Break {
     DISABLE = 0,
     ENABLE = 1,
 }
 
 #[derive(Copy, Clone)]
+/// Divisor latch access bit
 pub enum DLAB {
     CLEAR = 0,
     SET = 1,
 }
 
 #[derive(Copy, Clone)]
+/// DMA mode select
 pub enum DMAMode {
     MODE0 = 0,
     MODE1 = 1,
 }
 
 impl Uart {
+    /// Creates a new instance of `Uart` with the given base address.
     pub fn new(base_address: usize) -> Self {
         Self { base_address }
     }
 
+    /// Initializes the UART peripheral with the given parameters.
     pub fn init(
         &self,
         word_length: WordLength,
@@ -72,8 +86,8 @@ impl Uart {
         break_: Break,
         dma_mode: DMAMode,
         divisor: u16,
-        ) {
-        self.init_lcr(
+    ) {
+        self.set_lcr(
             word_length,
             stop_bits,
             parity_bit,
@@ -81,13 +95,13 @@ impl Uart {
             stick_parity,
             break_,
             DLAB::SET,
-            );
-        self.init_fcr(dma_mode);
+        );
+        self.set_fcr(dma_mode);
         let ptr = (self.base_address) as *mut u16;
         unsafe {
             ptr.write_volatile(divisor);
         }
-        self.init_lcr(
+        self.set_lcr(
             word_length,
             stop_bits,
             parity_bit,
@@ -95,10 +109,11 @@ impl Uart {
             stick_parity,
             break_,
             DLAB::CLEAR,
-            );
+        );
     }
 
-    pub fn init_lcr(
+    /// Sets the line control register with the given parameters.
+    pub fn set_lcr(
         &self,
         word_length: WordLength,
         stop_bits: StopBits,
@@ -107,28 +122,30 @@ impl Uart {
         stick_parity: StickParity,
         break_: Break,
         dlab: DLAB,
-        ) {
+    ) {
         let ptr = (self.base_address + 3) as *mut u8;
         unsafe {
             ptr.write_volatile(
                 word_length as u8
-                | ((stop_bits as u8) << 2)
-                | ((parity_bit as u8) << 3)
-                | ((parity_select as u8) << 4)
-                | ((stick_parity as u8) << 5)
-                | ((break_ as u8) << 6)
-                | ((dlab as u8) << 7),
-                );
+                    | ((stop_bits as u8) << 2)
+                    | ((parity_bit as u8) << 3)
+                    | ((parity_select as u8) << 4)
+                    | ((stick_parity as u8) << 5)
+                    | ((break_ as u8) << 6)
+                    | ((dlab as u8) << 7),
+            );
         }
     }
 
-    pub fn init_fcr(&self, dma_mode: DMAMode) {
+    /// Sets the FIFO control register with the given parameter.
+    pub fn set_fcr(&self, dma_mode: DMAMode) {
         let ptr = (self.base_address + 2) as *mut u8;
         unsafe {
             ptr.write_volatile(1 | ((dma_mode as u8) << 3));
         }
     }
 
+    /// Writes the paramter in the transmitter holding register.
     pub fn put(&self, c: u8) {
         let ptr = self.base_address as *mut u8;
         unsafe {
@@ -136,6 +153,8 @@ impl Uart {
         }
     }
 
+    /// If data ready is set, returns the value read in the receiver buffer register. Otherwise
+    /// returns `None`.
     pub fn get(&self) -> Option<u8> {
         let ptr = self.base_address as *mut u8;
         let ptr_data_ready = (self.base_address + 5) as *mut u8;
