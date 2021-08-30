@@ -1,6 +1,6 @@
 = NS16550A
 
-image:https://img.shields.io/crates/v/ns16550a.svg["Crates.io", link="https://img.shields.io/crates/v/ns16550a.svg"]
+image:https://img.shields.io/crates/v/ns16550a.svg["Crates.io", link="https://crates.io/crates/ns16550a"]
 image:https://docs.rs/ns16550a/badge.svg["Released API docs", link="https://docs.rs/ns16550a"]
 image:https://img.shields.io/github/license/Jeudine/NS16550A["GitHub license",link="https://github.com/jeudine/NS16550A/blob/main/LICENSE"]
 
