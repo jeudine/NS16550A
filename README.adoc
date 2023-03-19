@@ -32,7 +32,7 @@ fn main() {
               StickParity::DISABLE,
               Break::DISABLE,
               DMAMode::MODE0,
-              100,
+              Divisor::BAUD1200,
               );
     write!(&mut uart, "Hello, world!\n\r");
     loop {
