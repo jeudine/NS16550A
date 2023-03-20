@@ -1,26 +1,24 @@
-= NS16550A
+# NS16550A
 
-image:https://img.shields.io/crates/v/ns16550a.svg["Crates.io", link="https://crates.io/crates/ns16550a"]
-image:https://docs.rs/ns16550a/badge.svg["Released API docs", link="https://docs.rs/ns16550a"]
-image:https://img.shields.io/github/license/Jeudine/NS16550A["GitHub license",link="https://github.com/jeudine/NS16550A/blob/main/LICENSE"]
+![Crates.io](https://img.shields.io/crates/v/ns16550a)
+![docs.rs](https://img.shields.io/docsrs/ns16550a)
+![GitHub](https://img.shields.io/github/license/jeudine/NS16550A)
 
 NS16550A UART driver written in Rust.
 
-== Installation
+## Installation
 
 Add the following to Cargo.toml:
 
-[source, toml]
-----
-ns16550a = "0.1"
-----
+``` toml
+ns16550a = "0.2"
+```
 
-== Example
+## Example
 
 Example usage:
 
-[source, rust]
-----
+``` rust
 use ns16550a::*;
 
 fn main() {
@@ -39,4 +37,4 @@ fn main() {
         uart.put(uart.get().unwrap_or_default());
     }
 }
-----
+```
