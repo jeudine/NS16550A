@@ -69,6 +69,22 @@ pub enum DMAMode {
     MODE1 = 1,
 }
 
+#[repr(u16)]
+#[derive(Copy, Clone)]
+/// Divisor for setting the baud rate
+pub enum Divisor {
+    BAUD50 = 0x09_00,
+    BAUD300 = 0x01_80,
+    BAUD1200 = 0x00_60,
+    BAUD2400 = 0x00_30,
+    BAUD4800 = 0x00_18,
+    BAUD9600 = 0x00_0C,
+    BAUD19200 = 0x00_06,
+    BAUD38400 = 0x00_03,
+    BAUD57600 = 0x00_02,
+    BAUD115200 = 0x00_01,
+}
+
 impl Uart {
     /// Creates a new instance of `Uart` with the given base address.
     pub fn new(base_address: usize) -> Self {
@@ -85,7 +101,7 @@ impl Uart {
         stick_parity: StickParity,
         break_: Break,
         dma_mode: DMAMode,
-        divisor: u16,
+        divisor: Divisor,
     ) {
         self.set_lcr(
             word_length,
@@ -99,7 +115,7 @@ impl Uart {
         self.set_fcr(dma_mode);
         let ptr = (self.base_address) as *mut u16;
         unsafe {
-            ptr.write_volatile(divisor);
+            ptr.write_volatile(divisor as u16);
         }
         self.set_lcr(
             word_length,
