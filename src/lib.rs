@@ -11,7 +11,7 @@ pub struct Uart {
     base_address: usize,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 /// Word length
 pub enum WordLength {
     FIVE = 0,
@@ -20,49 +20,49 @@ pub enum WordLength {
     EIGHT = 3,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 /// Number of stop bits
 pub enum StopBits {
     ONE = 0,
     TWO = 1,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 /// Parity bits
 pub enum ParityBit {
     DISABLE = 0,
     ENABLE = 1,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 /// Parity select
 pub enum ParitySelect {
     EVEN = 0,
     ODD = 1,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 /// Stick parity
 pub enum StickParity {
     DISABLE = 0,
     ENABLE = 1,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 /// Break
 pub enum Break {
     DISABLE = 0,
     ENABLE = 1,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 /// Divisor latch access bit
 pub enum DLAB {
     CLEAR = 0,
     SET = 1,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 /// DMA mode select
 pub enum DMAMode {
     MODE0 = 0,
@@ -70,7 +70,7 @@ pub enum DMAMode {
 }
 
 #[repr(u16)]
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 /// Divisor for setting the baud rate
 pub enum Divisor {
     BAUD50 = 0x09_00,
