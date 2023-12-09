@@ -91,6 +91,11 @@ impl Uart {
         Self { base_address }
     }
 
+    /// Returns the base address
+    pub const fn base_address(&self) -> usize {
+        self.base_address
+    }
+
     /// Initializes the UART peripheral with the given parameters.
     pub fn init(
         &self,
