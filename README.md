@@ -11,7 +11,7 @@ NS16550A UART driver written in Rust.
 Add the following to Cargo.toml:
 
 ``` toml
-ns16550a = "0.2"
+ns16550a = "0.3"
 ```
 
 ## Example

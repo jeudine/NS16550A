@@ -1,6 +1,6 @@
 [package]
 name = "ns16550a"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Julien Eudine <julien@eudine.fr>"]
 description = "NS16550A UART driver."
 license = "MIT"
