@@ -87,7 +87,7 @@ pub enum Divisor {
 
 impl Uart {
 	/// Creates a new instance of `Uart` with the given base address.
-	pub fn new(base_address: usize) -> Self {
+	pub const fn new(base_address: usize) -> Self {
 		Self { base_address }
 	}
 
