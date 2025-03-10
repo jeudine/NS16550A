@@ -1,8 +1,8 @@
 # NS16550A
 
-![Crates.io](https://img.shields.io/crates/v/ns16550a)
-![docs.rs](https://img.shields.io/docsrs/ns16550a)
-![GitHub](https://img.shields.io/github/license/jeudine/NS16550A)
+[![crates.io](https://img.shields.io/crates/v/ns16550a)](https://crates.io/crates/mseq)
+[![doc](https://doc.rs/ns16550a)](https://docs.rs/ns16550a)
+[![github](https://img.shields.io/github/license/jeudine/NS16550A)](https://github.com/jeudine/NS16550A/blob/main/LICENSE)
 
 NS16550A UART driver written in Rust.
 
