@@ -1,0 +1,10 @@
+[target.'cfg(all(target_arch = "riscv64", target_os = "none"))']
+rustflags = [
+  "-C", "link-arg=-Tlink.x",  # Use your linker script
+  "-C", "link-arg=-nostartfiles",  # Skip standard startup files
+]
+
+runner = "qemu-system-riscv64 -machine virt -nographic -bios none -kernel"
+
+[build]
+target = "riscv64gc-unknown-none-elf"

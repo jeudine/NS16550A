@@ -8,7 +8,7 @@ readme = "README.md"
 repository = "https://github.com/jeudine/NS16550A"
 categories = ["embedded", "no-std", "hardware-support" ]
 documentation = "https://docs.rs/ns16550a"
-edition = "2018"
+edition = "2024"
 
 [dependencies]
 
