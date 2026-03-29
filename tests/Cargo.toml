@@ -1,0 +1,14 @@
+[package]
+name = "ns16550a-tests"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+riscv = "0.16.0"
+riscv-rt = "0.17.1"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
