@@ -20,7 +20,7 @@ fn main() -> ! {
         DMAMode::MODE0,
         Divisor::BAUD1200,
     );
-    let _ = write!(&mut uart, "Hello, world!\n\r");
+    write!(&mut uart, "Hello, world!\n\r");
     loop {}
 }
 

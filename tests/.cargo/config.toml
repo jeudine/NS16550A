@@ -1,10 +1,6 @@
-[target.'cfg(all(target_arch = "riscv64", target_os = "none"))']
-rustflags = [
-  "-C", "link-arg=-Tlink.x",
-]
+[target.'cfg(all(target_arch = "riscv32", target_os = "none"))']
 
-runner = "qemu-system-riscv64 -machine virt -cpu rv64 -m 4M -nographic -serial mon:stdio -bios none -kernel"
-#runner = "qemu-system-riscv64 -machine virt -cpu rv64 -smp 4 -m 128M -drive if=none,format=raw,file=hdd.dsk,id=foo -device virtio-blk-device,scsi=off,drive=foo -nographic -serial mon:stdio -bios none -device virtio-rng-device -device virtio-gpu-device -device virtio-net-device -device virtio-tablet-device -device virtio-keyboard-device -kernel "	
+runner = "qemu-system-riscv32 -machine virt -nographic -serial stdio -monitor none -bios none -kernel"
 
 [build]
-target = "riscv64gc-unknown-none-elf"
+target = "riscv32imac-unknown-none-elf"
