@@ -6,9 +6,16 @@ edition = "2024"
 [dependencies]
 riscv = "0.16.0"
 riscv-rt = "0.17.1"
+ns16550a= { path = ".." }
+
 
 [profile.dev]
 panic = "abort"
 
 [profile.release]
 panic = "abort"
+
+[features]
+default = ["memory", "device"]
+device = ["riscv-rt/device"]
+memory = ["riscv-rt/memory"]

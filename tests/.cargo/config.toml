@@ -1,7 +1,5 @@
 [target.'cfg(all(target_arch = "riscv64", target_os = "none"))']
 rustflags = [
-  "-C", "link-arg=-Tdevice.x",
-  "-C", "link-arg=-Tmemory.x",
   "-C", "link-arg=-Tlink.x",
 ]
 
