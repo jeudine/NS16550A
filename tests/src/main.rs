@@ -1,7 +1,7 @@
 #![no_std]
 #![no_main]
 
-use core::fmt::Write;
+use core::fmt::{Result, Write};
 use ns16550a::*;
 use panic_halt as _;
 use riscv_rt::entry;
@@ -21,11 +21,17 @@ fn main() -> ! {
         Divisor::BAUD1200,
     );
 
-    write!(&mut uart, "Hello, world!\n\r");
+    if test_write(&mut uart).is_err() {
+        exit_qemu();
+    }
 
     exit_qemu();
+    panic!()
+}
 
-    loop {}
+fn test_write(uart: &mut Uart) -> Result {
+    write!(uart, "Hello, world!\n\r")?;
+    write!(uart, "Bonjour, UART!\n\r")
 }
 
 fn exit_qemu() {

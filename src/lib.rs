@@ -199,7 +199,7 @@ impl Uart {
 
 impl Write for Uart {
 	fn write_str(&mut self, s: &str) -> Result {
-		s.bytes().for_each(|c| while self.put(c) == None {});
+		s.bytes().for_each(|c| while self.put(c).is_none() {});
 		Ok(())
 	}
 }
