@@ -2,8 +2,8 @@
 #![no_main]
 
 use core::fmt::Write;
-use core::panic::PanicInfo;
 use ns16550a::*;
+use panic_halt as _;
 use riscv_rt::entry;
 
 #[entry]
@@ -20,11 +20,16 @@ fn main() -> ! {
         DMAMode::MODE0,
         Divisor::BAUD1200,
     );
+
     write!(&mut uart, "Hello, world!\n\r");
+
+    exit_qemu();
+
     loop {}
 }
 
-#[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
-    loop {}
+fn exit_qemu() {
+    unsafe {
+        core::ptr::write_volatile(0x100000 as *mut u32, 0x5555);
+    }
 }
