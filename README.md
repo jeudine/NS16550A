@@ -72,3 +72,7 @@ fn setup_uart() -> Uart {
     uart
 }
 ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
