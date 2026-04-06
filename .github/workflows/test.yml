@@ -29,8 +29,8 @@ jobs:
 
       - name: Build host verification
         working-directory: tests/host_test
-        run: cargo build --target x86_64-unknown-linux-gnu --release
+        run: cargo build --release
 
       - name: Run host verification
         working-directory: tests/host_test
-        run: cargo run --target x86_64-unknown-linux-gnu --release -- --qemu-path qemu-system-riscv32 --kernel-path ../target/riscv32imac-unknown-none-elf/release/ns16550a-tests
+        run: cargo run --release
