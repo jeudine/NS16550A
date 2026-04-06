@@ -1,0 +1,16 @@
+name: Spelling Check
+
+on:
+  push:
+    branches: [ unit_test ]
+  pull_request:
+    branches: [ unit_test ]
+
+jobs:
+  spelling:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+      - name: typos
+        uses: crate-ci/typos@master
