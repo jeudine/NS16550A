@@ -11,13 +11,15 @@ fn main() -> ! {
     let mut uart = Uart::new(0x1000_0000);
 
     uart.init(
-        WordLength::EIGHT,
-        StopBits::ONE,
-        ParityBit::DISABLE,
-        ParitySelect::EVEN,
-        StickParity::DISABLE,
-        Break::DISABLE,
-        DMAMode::MODE0,
+        UartConfig {
+            word_length: WordLength::EIGHT,
+            stop_bits: StopBits::ONE,
+            parity_bit: ParityBit::DISABLE,
+            parity_select: ParitySelect::EVEN,
+            stick_parity: StickParity::DISABLE,
+            break_: Break::DISABLE,
+            dma_mode: DMAMode::MODE0,
+        },
         Divisor::BAUD1200,
     );
 
@@ -38,7 +40,9 @@ fn main() -> ! {
             let _ = uart.put(b'!'); // Acknowledgment
             break;
         }
-        unsafe { core::arch::asm!("nop"); }
+        unsafe {
+            core::arch::asm!("nop");
+        }
     }
 
     exit_qemu();
@@ -47,15 +51,15 @@ fn main() -> ! {
 
 fn test_registers(uart: &mut Uart) {
     // Test LCR with different configurations
-    uart.set_lcr(
-        WordLength::EIGHT,
-        StopBits::ONE,
-        ParityBit::DISABLE,
-        ParitySelect::EVEN,
-        StickParity::DISABLE,
-        Break::DISABLE,
-        DLAB::CLEAR,
-    );
+    uart.set_lcr(LineControlConfig {
+        word_length: WordLength::EIGHT,
+        stop_bits: StopBits::ONE,
+        parity_bit: ParityBit::DISABLE,
+        parity_select: ParitySelect::EVEN,
+        stick_parity: StickParity::DISABLE,
+        break_: Break::DISABLE,
+        dlab: DLAB::CLEAR,
+    });
 
     // Test FCR with both DMA modes
     uart.set_fcr(DMAMode::MODE0);
@@ -71,7 +75,7 @@ fn test_io_operations(uart: &mut Uart) {
     uart.put(b'T');
     uart.put(b'\r');
     uart.put(b'\n');
-    
+
     // Test GET operation - try to receive and echo back if data available
     for _ in 0..10 {
         if let Some(byte) = uart.get() {

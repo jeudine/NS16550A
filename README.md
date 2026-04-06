@@ -23,15 +23,18 @@ use ns16550a::*;
 
 fn main() {
     let mut uart = Uart::new(0x1000_0000);
-    uart.init(WordLength::EIGHT,
-              StopBits::ONE,
-              ParityBit::DISABLE,
-              ParitySelect::EVEN,
-              StickParity::DISABLE,
-              Break::DISABLE,
-              DMAMode::MODE0,
-              Divisor::BAUD1200,
-              );
+    uart.init(
+        UartConfig {
+            word_length: WordLength::EIGHT,
+            stop_bits: StopBits::ONE,
+            parity_bit: ParityBit::DISABLE,
+            parity_select: ParitySelect::EVEN,
+            stick_parity: StickParity::DISABLE,
+            break_: Break::DISABLE,
+            dma_mode: DMAMode::MODE0,
+        },
+        Divisor::BAUD1200,
+    );
     write!(&mut uart, "Hello, world!\n\r");
     loop {
         uart.put(uart.get().unwrap_or_default());
