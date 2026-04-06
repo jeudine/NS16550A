@@ -15,9 +15,7 @@ A no_std Rust driver for the NS16550A UART peripheral, designed for embedded sys
 - **Easy integration**: Simple API with `core::fmt::Write` support
 - **Memory-mapped I/O**: Direct hardware register access for maximum performance
 
-## Quick Start
-
-### Basic Usage
+## Basic Usage
 
 ```rust
 use ns16550a::*;
@@ -49,27 +47,6 @@ fn main() {
             uart.put(byte).unwrap();
         }
     }
-}
-```
-
-### Advanced Configuration
-
-```rust
-use ns16550a::*;
-
-fn setup_uart() -> Uart {
-    let mut uart = Uart::new(0x4000_0000);
-    
-    // 9600 baud, 8N1 configuration (most common)
-    let config = UartConfig {
-        word_length: WordLength::EIGHT,
-        stop_bits: StopBits::ONE,
-        parity_bit: ParityBit::DISABLE,
-        ..Default::default()
-    };
-    
-    uart.init(config, Divisor::BAUD9600);
-    uart
 }
 ```
 
