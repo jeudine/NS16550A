@@ -1,0 +1,26 @@
+name: Rust Clippy Lint
+
+on: [push, pull_request]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  clippy:
+    name: Clippy Lint
+    runs-on: ubuntu-24.04
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Configure Rust toolchain
+        run: |
+          rustup toolchain install stable
+          rustup default stable
+          rustup target add riscv32imac-unknown-none-elf
+      
+      - name: Cache Dependencies
+        uses: Swatinem/rust-cache@v2
+      
+      - name: Run clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
