@@ -5,7 +5,7 @@
 [![github](https://img.shields.io/github/license/jeudine/NS16550A)](https://github.com/jeudine/NS16550A/blob/main/LICENSE)
 [![CI/CD](https://github.com/jeudine/NS16550A/actions/workflows/ci.yml/badge.svg)](https://github.com/jeudine/NS16550A/actions/workflows/ci.yml)
 
-A no_std Rust driver for the NS16550A UART peripheral with FIFO support, designed for embedded systems.
+A no_std Rust driver for the NS16550A UART peripheral, designed for embedded systems.
 
 ## Features
 
