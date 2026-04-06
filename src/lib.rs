@@ -147,7 +147,7 @@ pub enum Divisor {
 /// # Example
 /// ```no_run
 /// use ns16550a::{UartConfig, WordLength, StopBits, ParityBit, ParitySelect, StickParity, Break, DMAMode};
-/// 
+///
 /// let config = UartConfig {
 ///     word_length: WordLength::EIGHT,
 ///     stop_bits: StopBits::ONE,
@@ -198,7 +198,7 @@ impl Default for UartConfig {
 /// # Example
 /// ```no_run
 /// use ns16550a::{LineControlConfig, WordLength, StopBits, ParityBit, ParitySelect, StickParity, Break, DLAB};
-/// 
+///
 /// let config = LineControlConfig {
 ///     word_length: WordLength::EIGHT,
 ///     stop_bits: StopBits::ONE,
