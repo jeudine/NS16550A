@@ -2,8 +2,8 @@
 
 [![crates.io](https://img.shields.io/crates/v/ns16550a)](https://crates.io/crates/ns16550a)
 [![doc](https://docs.rs/ns16550a/badge.svg)](https://docs.rs/ns16550a)
-[![github](https://img.shields.io/github/license/jeudine/NS16550A)](https://github.com/jeudine/NS16550A/blob/main/LICENSE)
 [![CI](https://github.com/jeudine/NS16550A/actions/workflows/ci.yml/badge.svg)](https://github.com/jeudine/NS16550A/actions/workflows/ci.yml)
+[![github](https://img.shields.io/github/license/jeudine/NS16550A)](https://github.com/jeudine/NS16550A/blob/main/LICENSE)
 
 A no_std Rust driver for the NS16550A UART peripheral, designed for embedded systems.
 
@@ -19,6 +19,7 @@ A no_std Rust driver for the NS16550A UART peripheral, designed for embedded sys
 
 ```rust
 use ns16550a::*;
+use std::fmt::Write;
 
 fn main() {
     // Create UART instance at memory-mapped address
@@ -39,12 +40,12 @@ fn main() {
     uart.init(config, Divisor::BAUD1200);
     
     // Write using fmt::Write trait
-    write!(&mut uart, "Hello, world!\n").unwrap();
+    writeln!(&mut uart, "Hello, world!").unwrap();
     
     // Simple echo loop
     loop {
         if let Some(byte) = uart.get() {
-            uart.put(byte).unwrap();
+            while uart.put(byte).is_none() {}
         }
     }
 }

@@ -1,0 +1,5 @@
+[target.'cfg(all(target_arch = "riscv32", target_os = "none"))']
+runner = "qemu-system-riscv32 -machine virt -nographic -serial stdio -monitor none -bios none -kernel"
+
+[build]
+target = "riscv32imac-unknown-none-elf"

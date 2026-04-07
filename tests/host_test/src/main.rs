@@ -59,7 +59,7 @@ fn main() {
     println!("QEMU Output:\n{}", output);
 
     // Verify expected patterns
-    let expected_patterns = ["TEST", "UART tests completed successfully!"];
+    let expected_patterns = ["UART", "Hello, World!"];
     let mut all_passed = true;
 
     for pattern in expected_patterns {
@@ -90,14 +90,30 @@ fn main() {
     println!("Response to input: {}", response);
 
     // Check if we see echo or acknowledgment
-    if response.contains("!") {
-        println!("✓ UART GET operation working (received acknowledgment)");
+    if response.eq("X!") {
+        println!("✓ UART GET operation working");
     } else {
-        println!("⚠ UART GET operation: no clear acknowledgment (may be expected in this setup)");
+        println!("✗ UART GET operation: no clear acknowledgment");
+        all_passed = false;
     }
 
-    // Wait for QEMU to exit
-    let status = child.wait().expect("Failed to wait for QEMU");
+    // Wait for QEMU to exit with timeout
+    let timeout = Duration::from_secs(1);
+    let start = std::time::Instant::now();
+
+    let status = loop {
+        if let Some(status) = child.try_wait().expect("Failed to wait for QEMU") {
+            break status;
+        }
+
+        if start.elapsed() >= timeout {
+            println!("✗ QEMU did not exit within timeout period");
+            child.kill().expect("Failed to kill QEMU process");
+            std::process::exit(1);
+        }
+
+        thread::sleep(Duration::from_millis(100));
+    };
 
     if all_passed && status.success() {
         println!("\n✓ All UART tests passed!");

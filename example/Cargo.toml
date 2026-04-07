@@ -1,0 +1,10 @@
+[package]
+name = "qemu_example"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+panic-halt = "1.0"
+riscv = "0.16.0"
+riscv-rt = "0.17.1"
+ns16550a = { path = ".." }

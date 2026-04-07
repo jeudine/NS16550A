@@ -33,15 +33,12 @@ fn main() -> ! {
     test_write_success(&mut uart).unwrap();
 
     // Wait for host input to test GET operation (for host verification)
-    for _ in 0..1000000 {
+    loop {
         if let Some(byte) = uart.get() {
             // Echo back received data
             let _ = uart.put(byte);
             let _ = uart.put(b'!'); // Acknowledgment
             break;
-        }
-        unsafe {
-            core::arch::asm!("nop");
         }
     }
 
@@ -69,9 +66,9 @@ fn test_registers(uart: &mut Uart) {
 
 fn test_io_operations(uart: &mut Uart) {
     // Test PUT operation - send test pattern
-    uart.put(b'T');
-    uart.put(b'E');
-    uart.put(b'S');
+    uart.put(b'U');
+    uart.put(b'A');
+    uart.put(b'R');
     uart.put(b'T');
     uart.put(b'\r');
     uart.put(b'\n');
@@ -88,7 +85,7 @@ fn test_io_operations(uart: &mut Uart) {
 }
 
 fn test_write_success(uart: &mut Uart) -> Result {
-    write!(uart, "UART tests completed successfully!\n\r")
+    writeln!(uart, "Hello, World!")
 }
 
 fn exit_qemu() {

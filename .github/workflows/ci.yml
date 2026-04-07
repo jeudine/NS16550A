@@ -102,3 +102,31 @@ jobs:
       - name: Run host verification
         working-directory: tests/host_test
         run: cargo run --release
+
+  example:
+    name: Example Check
+    runs-on: ubuntu-24.04
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Configure Rust toolchain
+        run: |
+          rustup toolchain install stable
+          rustup default stable
+          rustup target add riscv32imac-unknown-none-elf
+      
+      - name: Cache Dependencies
+        uses: Swatinem/rust-cache@v2
+      
+      - name: Check example formatting
+        working-directory: example
+        run: cargo fmt --all -- --check
+      
+      - name: Run clippy on example
+        working-directory: example
+        run: cargo clippy -- -D warnings
+      
+      - name: Build example
+        working-directory: example
+        run: cargo build --release
