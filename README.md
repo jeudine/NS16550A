@@ -3,7 +3,7 @@
 [![crates.io](https://img.shields.io/crates/v/ns16550a)](https://crates.io/crates/ns16550a)
 [![doc](https://docs.rs/ns16550a/badge.svg)](https://docs.rs/ns16550a)
 [![github](https://img.shields.io/github/license/jeudine/NS16550A)](https://github.com/jeudine/NS16550A/blob/main/LICENSE)
-[![CI/CD](https://github.com/jeudine/NS16550A/actions/workflows/ci.yml/badge.svg)](https://github.com/jeudine/NS16550A/actions/workflows/ci.yml)
+[![CI](https://github.com/jeudine/NS16550A/actions/workflows/ci.yml/badge.svg)](https://github.com/jeudine/NS16550A/actions/workflows/ci.yml)
 
 A no_std Rust driver for the NS16550A UART peripheral, designed for embedded systems.
 
