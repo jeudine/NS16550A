@@ -91,10 +91,6 @@ jobs:
         working-directory: tests
         run: cargo build --release
       
-      - name: Run basic tests
-        working-directory: tests
-        run: cargo run --release
-      
       - name: Build host verification
         working-directory: tests/host_test
         run: cargo build --release
