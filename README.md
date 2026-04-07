@@ -19,7 +19,7 @@ A no_std Rust driver for the NS16550A UART peripheral, designed for embedded sys
 
 ```rust
 use ns16550a::*;
-use std::fmt::Write;
+use core::fmt::Write;
 
 fn main() {
     // Create UART instance at memory-mapped address
@@ -50,6 +50,8 @@ fn main() {
     }
 }
 ```
+
+For a complete working example that runs with QEMU, see the [example directory](/example).
 
 ## License
 

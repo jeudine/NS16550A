@@ -9,6 +9,7 @@
 //!
 //! ```no_run
 //! use ns16550a::{Uart, UartConfig, WordLength, StopBits, ParityBit, ParitySelect, StickParity, Break, DMAMode, Divisor};
+//! use core::fmt::Write;
 //!
 //! // Create a UART instance at base address 0x10000000
 //! let mut uart = Uart::new(0x10000000);
@@ -24,11 +25,14 @@
 //!     dma_mode: DMAMode::MODE0,
 //! };
 //!
-//! // Initialize UART with 115200 baud rate
-//! uart.init(config, Divisor::BAUD115200);
+//! // Initialize UART with 1200 baud rate
+//! uart.init(config, Divisor::BAUD1200);
 //!
 //! // Write data
 //! uart.put(b'A');
+//!
+//! // Write using fmt::Write trait
+//! writeln!(&mut uart, "Hello, world!").unwrap();
 //!
 //! // Read data
 //! if let Some(byte) = uart.get() {
@@ -376,7 +380,7 @@ impl Uart {
     ///
     /// let uart = Uart::new(0x10000000);
     /// if let Some(byte) = uart.put(b'A') {
-    ///     println!("Sent: {}", byte);
+    ///     // Byte was written
     /// }
     /// ```
     pub fn put(&self, c: u8) -> Option<u8> {
@@ -409,7 +413,7 @@ impl Uart {
     ///
     /// let uart = Uart::new(0x10000000);
     /// if let Some(byte) = uart.get() {
-    ///     println!("Received: {}", byte);
+    ///     // Byte was read
     /// }
     /// ```
     pub fn get(&self) -> Option<u8> {

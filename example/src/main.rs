@@ -27,6 +27,7 @@ fn main() -> ! {
 
     // Write using fmt::Write trait
     writeln!(&mut uart, "Hello, world!").unwrap();
+    writeln!(&mut uart, "Simple echo loop (press `q` to quit):").unwrap();
 
     // Simple echo loop (exit on 'q')
     loop {
