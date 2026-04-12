@@ -49,7 +49,7 @@ fn main() {
     let mut stdout = child.stdout.take().expect("Failed to capture stdout");
 
     // Give QEMU time to start
-    thread::sleep(Duration::from_millis(300));
+    thread::sleep(Duration::from_millis(2000));
 
     // Read initial output (PUT test)
     let mut buffer = [0u8; 1024];
