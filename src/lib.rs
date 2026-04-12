@@ -41,6 +41,7 @@
 //! ```
 
 #![no_std]
+#![warn(missing_docs)]
 
 use core::fmt::{Result, Write};
 
@@ -131,15 +132,25 @@ pub enum DMAMode {
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 /// Divisor for setting the baud rate
 pub enum Divisor {
+    /// 50 baud rate divisor
     BAUD50 = 0x09_00,
+    /// 300 baud rate divisor
     BAUD300 = 0x01_80,
+    /// 1200 baud rate divisor
     BAUD1200 = 0x00_60,
+    /// 2400 baud rate divisor
     BAUD2400 = 0x00_30,
+    /// 4800 baud rate divisor
     BAUD4800 = 0x00_18,
+    /// 9600 baud rate divisor
     BAUD9600 = 0x00_0C,
+    /// 19200 baud rate divisor
     BAUD19200 = 0x00_06,
+    /// 38400 baud rate divisor
     BAUD38400 = 0x00_03,
+    /// 57600 baud rate divisor
     BAUD57600 = 0x00_02,
+    /// 115200 baud rate divisor
     BAUD115200 = 0x00_01,
 }
 

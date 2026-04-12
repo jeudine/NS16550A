@@ -1,6 +1,6 @@
 [package]
 name = "ns16550a"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Julien Eudine <julien@eudine.fr>"]
 description = "A no_std Rust driver for the NS16550A UART peripheral, designed for embedded systems."
 license = "MIT"
